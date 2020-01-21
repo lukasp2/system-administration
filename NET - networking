@@ -17,17 +17,10 @@ This is what the file should look like on every machine:
 1.3. Reboot system and check hostname with the command "hostname"
 
 2. basic network connectivity
-network configuration is in /etc/network/interfaces. There is a man page de-scribing the file format.
+you may have different names (not ens3, ens4, lo), check by running:
+$ ip address
 
-Your router needs three network interfaces:
-- the loopback interface (lo; which is used for network connections within the gateway), 
-- the interface connected to the distribution network (eth0)
-- the interface connected to your network (eth1). 
-
-you may have different names (not eth0, eth1, lo), check by running:
-$ ip address.
-
-2.1. Go to the router and write the following in the file /etc/network/interfaces:
+2.1. write the following in the file /etc/network/interfaces on all machines:
 auto lo
 iface lo inet loopback
 
@@ -35,36 +28,24 @@ allow-hotplug ens3
 auto ens3
 iface ens3 inet dhcp
 
-auto ens4
-iface ens4 inet static
+auto ens4 (only for router)
+iface ens4 inet static (only for router)
  
-address 10.0.0.1
+address 10.0.0.1 (10.0.0.2 on server, and 10.0.0.3, 10.0.0.4 on client-1 and client-2)
 netmask 255.0.0.0
 broadcast 10.255.255.255
 network 10.0.0.0
+gateway 10.0.0.1 (only for server and clients)
 
-2.2. After interface config:
-1. Use ifup on the interfaces so that they can all be used:
-$ ifup ens3; ifup ens4
+2.2. After interface config run:
+$ ifup ens3
+$ ifup ens4 (only for router)
 
-2.3. Use "ip" to verify your configuration. Command should show all interfaces.
+2.3. This command should show now all interfaces:
 $ ip addr
 
-2.4. Type this into the clients and servers /etc/network/interfaces:
-auto lo
-iface lo inet loopback
-
-allow-hotplug ens3
-auto ens3
-iface ens3 inet static
-
-address 10.0.0.1 (for server, and address 10.0.0.3,4 for client-1 and 2)
-netmask 255.0.0.0
-broadcast 10.255.255.255
-network 10.0.0.0
-gateway 10.0.0.1
-
-2.5. Reboot and make sure you can ping 10.0.0.1 (the router).
+2.5. Reboot and make sure you can ping 10.0.0.1 (the router) from the other machines.
+$ ping 10.0.0.1
 
 3. Resolver: Type this into /etc/resolv.conf on the server
 domain.ida.liu.se
@@ -81,9 +62,6 @@ nameserver 130.236.1.9
 #dhclient ens3 -v
 
 4.2 Edit /etc/sysctl.conf on router and change the line net.ipv4.ip_forward = 0 to net.ipv4.ip_forward = 1. 
-
-5. Update interface on client-1 and 2 
-ifdown eth0; ifup eth0
 
 .. you should now be able to curl www.google.com from all machines
 
