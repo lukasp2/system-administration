@@ -39,20 +39,16 @@ You may have different names (not ens3, ens4, lo). Check this by running:
  $ ifup ens3
  $ ifup ens4 (only for router)
 
-2.3. This command should show now all interfaces:
- $ ip addr
-
-2.5. Reboot and make sure ...
- 1: .. you can ping 10.0.0.1 (the router) from the other machines. 
-    $ ping 10.0.0.1
- 2: .. your hostnames are correct on all machines (should show gw, server, client-1, etc.)
-    $ hostname
+2.3. Reboot and make sure you can curl google from the router. 
+ $ curl www.google.com
+ 
+3. Getting Git for the router
+ $ apt-get -y install git
+ $ git clone https://github.com/lukasp2/system-administration.git
 
 3. Resolver: Type this into /etc/resolv.conf on the server
  domain.ida.liu.se
  nameserver 130.236.1.9
- #nameserver 130.236.1.10
- #nameserver 130.236.1.11
 
 #4.1. NAT: run the following commands on the router
  #echo "1" > /proc/sys/net/ipv4/ip_forward
@@ -68,8 +64,8 @@ You may have different names (not ens3, ens4, lo). Check this by running:
 .. you should now be able to curl www.google.com from all machines
 
 5. Getting Git (for all machines)
- apt-get -y install git
- git clone https://github.com/lukasp2/system-administration.git
+ $ apt-get -y install git
+ $ git clone https://github.com/lukasp2/system-administration.git
 
 .. done.
 
