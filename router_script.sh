@@ -12,3 +12,6 @@ echo "dhclient ens3 -v" >> ~/.bashrc
 echo "echo '1' > /proc/sys/net/ipv4/ip_forward" >> ~/.bashrc
 
 echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+
+apt-get update
+apt-get -y upgrade
