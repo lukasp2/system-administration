@@ -17,3 +17,5 @@ cat ~/system-administration/resources/server/\\etc\\bind\\named.conf.options > /
 
 apt-get update
 /etc/init.d/bind9 restart
+
+apt-get -y install aptitude
