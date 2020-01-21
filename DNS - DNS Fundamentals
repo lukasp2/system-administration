@@ -3,7 +3,7 @@
  $ apt-get -y install git
  $ git clone https://github.com/lukasp2/system-administration.git
 
-2. Excecute the server script
+2. Execute the server script (on the server)
  $ chmod +x server_script.sh
  $ ./server_script.sh
  
