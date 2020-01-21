@@ -1,9 +1,11 @@
 #!/bin/bash
 
-apt-get update && upgrade && dist-upgrade
+apt-get update
+apt-get -y upgrade
+apt-get -y dist-upgrade
 
-apt-get install bind9 bind9utils bind9-doc
-apt-get install dnsutils
+apt-get -y install bind9 bind9utils bind9-doc
+apt-get -y install dnsutils
 
 cat ./server/\etc\network\interfaces > /etc/network/interfaces
 cat ./server/\etc\bind\named.conf.local > /etc/bind/named.conf.local
