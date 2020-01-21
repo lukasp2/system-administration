@@ -1,5 +1,4 @@
-# system-administration
-TDDI41
+# TDDI41, System Administration
 
 start machines:
 /courses/TDDI41/start_project.sh
