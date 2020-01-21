@@ -9,5 +9,6 @@ apt-get -y install iptables-persistent
 /sbin/iptables -A FORWARD -i ens4 -o ens3 -j ACCEPT
 
 echo "dhclient ens3 -v" >> ~/.bashrc
+echo "echo '1' > /proc/sys/net/ipv4/ip_forward" >> ~/.bashrc
 
 echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
