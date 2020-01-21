@@ -1,0 +1,59 @@
+This is the first step you will have to finish. Without it, you will not have access to the internet and therefore no way of downloading the scripts and files needed to finish the other steps.
+
+1.1. setting the hostnames
+ For each machine, go to /etc/hostname and set the hostname of the respecitve machine.
+ router: gw
+ server: server
+ clients: client-1 and client-2
+
+1.2. Go to /etc/hosts and set the address, FQDN, and hostname on all your hosts. 
+This is what the file should look like on every machine:
+ 127.0.0.1  localhost
+ 10.0.0.1   gw.example.com         gw
+ 10.0.0.2   server.example.com     server
+ 10.0.0.3   client-1.example.com   client-1
+ 10.0.0.4   client-2.example.com   client-2
+
+2. basic network connectivity
+You may have different names (not ens3, ens4, lo). Check this by running:
+ $ ip address
+
+2.1. write the following in the file /etc/network/interfaces on all machines:
+ auto lo
+ iface lo inet loopback
+
+ allow-hotplug ens3
+ auto ens3
+ iface ens3 inet dhcp (for router)
+ iface ens3 inet static (for all others)
+
+ auto ens4 (only for router)
+ iface ens4 inet static (only for router)
+
+ address 10.0.0.1 (10.0.0.2 on server, and 10.0.0.3, 10.0.0.4 on client-1 and client-2)
+ netmask 255.0.0.0
+ broadcast 10.255.255.255
+ network 10.0.0.0
+ gateway 10.0.0.1 (only for server and clients)
+
+2.2. Resolver: Type this into /etc/resolv.conf on the clients and server
+ domain.ida.liu.se
+ nameserver 130.236.1.9
+
+2.3. After interface config run:
+ $ ifdown ens3; ifup ens3
+ $ ifup ens4 (only for router)
+ 
+2.4. Reboot and make sure you can curl google from the router. 
+ $ curl www.google.com
+
+4.1. Getting Git for the router
+ $ apt-get -y install git
+ $ git clone https://github.com/lukasp2/system-administration.git
+
+4.2. Execute ./router_script on the router
+ $ chmod +x router_script.sh
+ $ ./router_script
+
+.. done, you should now be able to curl www.google.com from all machines.
+
