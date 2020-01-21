@@ -55,13 +55,5 @@ You may have different names (not ens3, ens4, lo). Check this by running:
  $ chmod +x router_script.sh
  $ ./router_script
 
-.. you should now be able to curl www.google.com from all machines
-
-5. Getting Git (for all machines)
- $ apt-get -y install git
- $ git clone https://github.com/lukasp2/system-administration.git
-
-.. done.
-
-
+.. done, you should now be able to curl www.google.com from all machines.
 
