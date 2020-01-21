@@ -23,6 +23,8 @@ forwarders {
 
 dnssec-validation auto;
 
-auth-nxdomain no;    # conform to RFC1035
+# conform to RFC1035
+auth-nxdomain no;    
+
 listen-on-v6 { any; };
 };
