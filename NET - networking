@@ -69,7 +69,7 @@ You may have different names (not ens3, ens4, lo). Check this by running:
 
 5. Getting Git (for all machines)
  apt-get -y install git
- git clone <this repo>
+ git clone https://github.com/lukasp2/system-administration.git
 
 .. done.
 
