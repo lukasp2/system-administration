@@ -52,15 +52,9 @@ You may have different names (not ens3, ens4, lo). Check this by running:
  nameserver 130.236.1.9
 
 #4.1. NAT: run the following commands on the router
- #echo "1" > /proc/sys/net/ipv4/ip_forward
- #apt-get install iptables-persistent
  #/sbin/iptables -t nat -A POSTROUTING -o ens -j MASQUERADE
  #/sbin/iptables -A FORWARD -i ens3 -o ens4 -m state --state RELATED,ESTABLISHED -j ACCEPT
  #/sbin/iptables -A FORWARD -i ens4 -o ens3 -j ACCEPT
- #dhclient ens3 -v
-
-4.2 Edit /etc/sysctl.conf on router
- change the line net.ipv4.ip_forward = 0 to net.ipv4.ip_forward = 1. 
 
 .. you should now be able to curl www.google.com from all machines
 
