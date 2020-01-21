@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cat ~/system-administration/resources/router/\\etc\\resolv.conf > /etc/resolv.conf
+cat ~/system-administration/DNS/router/\\etc\\resolv.conf > /etc/resolv.conf
