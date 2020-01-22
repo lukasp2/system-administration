@@ -1,0 +1,11 @@
+1. run router.sh script on the router
+  $ chmod +x router.sh
+  $ ./router.sh
+
+2. verify that NTP is running
+  $ service ntp status
+    
+.. done
+
+reference webite:
+https://vitux.com/how-to-install-ntp-server-and-client-on-ubuntu/
