@@ -7,11 +7,7 @@
  $ chmod +x server.sh
  $ ./server.sh
  
-3. Execute the router and client script (on router and client 1 and 2)
- $ chmod +x router_and_clients.sh
- $ ./router_and_clients.sh
- 
-4. Run the tests
+3. Run the tests
  $ dig dons.com
  $ dig -x 10.0.0.2
  $ dig +short @dons.com porttest.dns-oarc.net TXT = GREAT
