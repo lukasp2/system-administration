@@ -4,7 +4,13 @@
 
 2. verify that NTP is running
   $ service ntp status
-    
+
+3. run server_and_clients.sh on the server and clients
+  $ chmod +x server_and_clients.sh
+  $ ./server_and_clients.sh
+
+
+
 .. done
 
 reference webite:
