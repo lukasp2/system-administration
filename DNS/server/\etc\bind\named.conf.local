@@ -1,0 +1,9 @@
+zone "dons.com" {
+    type master;
+    file "/etc/bind/for.dons.com";
+};
+
+zone "0.0.10.in-addr.arpa" {
+    type master;
+    file "/etc/bind/rev.dons.com";
+};
