@@ -24,6 +24,7 @@ if the above commands returns nothing, it means DNS configuration is valid.
 Check the zone files using commands:
  $ named-checkzone dons.com /etc/bind/for.dons.com
  $ named-checkzone dons.com /etc/bind/rev.dons.com
+these commands should return two lines, the last one "OK"
 
 .. done
 
