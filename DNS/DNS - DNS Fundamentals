@@ -1,10 +1,26 @@
 
-1. Getting Git (for all machines)
+1. Getting Git (for server and client 1 and 2)
  $ apt-get -y install git
  $ git clone https://github.com/lukasp2/system-administration.git
 
 2. Execute the server script (on the server)
- $ chmod +x server_script.sh
- $ ./server_script.sh
+ $ chmod +x server.sh
+ $ ./server.sh
  
-done
+3. Execute the router and client script (on router and client 1 and 2)
+ $ chmod +x router_and_clients.sh
+ $ ./router_and_clients.sh
+ 
+4. Run the tests
+ $ dig dons.com
+ $ dig -x 10.0.0.2
+ $ dig +short @dons.com porttest.dns-oarc.net TXT = GREAT
+
+Check the DNS configuration files with commands:
+ $ named-checkconf /etc/bind/named.conf
+ $ named-checkconf /etc/bind/named.conf.local
+if the above commands returns nothing, it means DNS configuration is valid.
+
+Check the zone files using commands:
+ $ named-checkzone dons.com /etc/bind/for.dons.com
+ $ named-checkzone dons.com /etc/bind/rev.dons.com
