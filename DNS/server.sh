@@ -16,6 +16,8 @@ cat ~/system-administration/DNS/server/\\etc\\resolv.conf > /etc/resolv.conf
 cat ~/system-administration/DNS/server/\\etc\\bind\\named.conf.options > /etc/bind/named.conf.options
 
 apt-get update
+
+chmod 777 /
 /etc/init.d/bind9 restart
 
 apt-get -y install aptitude
