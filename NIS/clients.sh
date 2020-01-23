@@ -9,3 +9,5 @@
 sed -ir 's/^passwd:\s*.*$/passwd: compat nis/g' /etc/nsswitch.conf
 sed -ir 's/^group:\s*.*$/group: compat nis/g' /etc/nsswitch.conf
 sed -ir 's/^shadow:\s*.*$/shadow: compat nis/g' /etc/nsswitch.conf
+
+sed -ir 's/^hosts:\s*.*$/shadow: files dns nis/g' /etc/nsswitch.conf
