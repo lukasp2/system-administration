@@ -9,7 +9,7 @@
   $ chmod +x server_and_clients.sh
   $ ./server_and_clients.sh
 
-3. run the test file
+3. run the test file on the server and clients
   $ chmod +x testing.sh
   $ ./testing.sh
 
