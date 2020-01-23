@@ -6,21 +6,10 @@
 2. Execute the server script (on the server)
  $ chmod +x server.sh
  $ ./server.sh
- 
-3. Run the tests
- $ dig dons.com
- $ dig -x 10.0.0.2
- $ dig +short @dons.com porttest.dns-oarc.net TXT = GREAT
 
-Check the DNS configuration files with commands:
- $ named-checkconf /etc/bind/named.conf
- $ named-checkconf /etc/bind/named.conf.local
-if the above commands returns nothing, it means DNS configuration is valid.
-
-Check the zone files using commands:
- $ named-checkzone dons.com /etc/bind/for.dons.com
- $ named-checkzone dons.com /etc/bind/rev.dons.com
-these commands should return two lines, the last one "OK"
+3. Run the test script testing.sh
+ $ chmod +x testing.sh
+ $ ./testing.sh
 
 .. done
 
