@@ -6,6 +6,10 @@ Note: name the NIS server example.com (or whatever is the default)
 
 2. press Ctrl-D when asked to add another NIS server besides server.example.com,
    then press 'y' to confirm the list of NIS servers.
-   
+
+4. After adding users to local server (?), apply them to NIS database, too.
+  $ cd /var/yp
+  $ make
+
 reference website (server): https://www.server-world.info/en/note?os=Debian_8&p=nis&f=1
 reference website (clients): https://www.server-world.info/en/note?os=Debian_8&p=nis&f=2
