@@ -9,6 +9,10 @@
   $ chmod +x server_and_clients.sh
   $ ./server_and_clients.sh
 
+4. run the test file
+  $ chmod +x testing.sh
+  $ ./testing.sh
+
 .. done
 
 reference webite:
