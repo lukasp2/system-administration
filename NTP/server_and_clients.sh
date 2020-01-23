@@ -9,5 +9,7 @@ service ntp start
 timedatectl set-ntp off
 
 apt-get -y install ntp
-echo "server gw prefer iburst" > /etc/ntp.conf
+
+echo "server gw prefer iburst" >> /etc/ntp.conf
+
 service ntp restart
