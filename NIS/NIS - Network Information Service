@@ -11,7 +11,7 @@ Note: name the NIS server example.com
   $ chmod +x clients.sh
   $ ./clients.sh
 
-Note: join the NIS server server.example.com
+Note: join the NIS server example.com
 
 4. After adding users to local server (?), apply them to NIS database, too.
   $ cd /var/yp
