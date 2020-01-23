@@ -9,3 +9,5 @@ sed -i 's/MERGE_PASSWD=false/MERGE_PASSWD=true/g' /var/yp/Makefile
 sed -i 's/MERGE_GROUP=false/MERGE_GROUP=true/g' /var/yp/Makefile
 
 /usr/lib/yp/ypinit -m
+
+systemctl restart nis
