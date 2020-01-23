@@ -6,6 +6,6 @@
 
 #echo "domain example.com server server.example.com" >> /etc/yp.conf
 
-sed -i 's/passwd: files systemd/passwd: compat nis/g' /etc/nsswitch.conf
+sed -ir 's/^passwd:\s*.*$/passwd: compat nis/g' /etc/nsswitch.conf
 #sed -i 's/group: files systemd/group: compat nis/g' /etc/nsswitch.conf
 #sed -i 's/shadow: files systemd/shadow: compat nis/g' /etc/nsswitch.conf
