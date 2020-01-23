@@ -9,8 +9,6 @@
   $ chmod +x server_and_clients.sh
   $ ./server_and_clients.sh
 
-
-
 .. done
 
 reference webite:
