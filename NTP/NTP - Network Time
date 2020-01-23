@@ -2,14 +2,14 @@
   $ chmod +x router.sh
   $ ./router.sh
 
-2. verify that NTP is running
+( 1.5. verify that NTP is running )
   $ service ntp status
 
-3. run server_and_clients.sh on the server and clients
+2. run server_and_clients.sh on the server and clients
   $ chmod +x server_and_clients.sh
   $ ./server_and_clients.sh
 
-4. run the test file
+3. run the test file
   $ chmod +x testing.sh
   $ ./testing.sh
 
