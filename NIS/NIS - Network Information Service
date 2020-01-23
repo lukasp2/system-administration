@@ -1,1 +1,8 @@
-1. run the router scipt
+1. run the server script
+  $ chmod +x server.sh
+  $ ./server.sh
+
+Note: name the NIS server example.com (or whatever is the default)
+
+reference website (server): https://www.server-world.info/en/note?os=Debian_8&p=nis&f=1
+reference website (clients): https://www.server-world.info/en/note?os=Debian_8&p=nis&f=2
