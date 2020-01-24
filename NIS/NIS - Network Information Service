@@ -1,4 +1,4 @@
-1. run the server script
+1. run the server script (server will also be a NIS client, see /etc/default/nis)
   $ chmod +x server.sh
   $ ./server.sh
   
