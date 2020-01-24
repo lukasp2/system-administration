@@ -1,19 +1,20 @@
 1. run the server script
   $ chmod +x server.sh
   $ ./server.sh
+  
+ 1.1 name the NIS server example.com (the default).
 
-Note: name the NIS server example.com
+ 1.2 press Ctrl-D when asked to add another NIS server besides server.example.com,
 
-2. press Ctrl-D when asked to add another NIS server besides server.example.com,
-   then press 'y' to confirm the list of NIS servers.
+ 1.3 press 'y' to confirm the list of NIS servers.
 
-3. run the client script on client-1 and client-2
+2. run the client script on client-1 and client-2
   $ chmod +x clients.sh
   $ ./clients.sh
 
-Note: join the NIS server example.com
+ 2.1 join the NIS server example.com
 
-4. (server) After adding users to local server (?), apply them to NIS database, too.
+3. (server) After adding users to local server (?), apply them to NIS database, too.
   $ cd /var/yp
   $ make
 
