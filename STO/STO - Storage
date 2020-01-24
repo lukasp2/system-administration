@@ -1,1 +1,5 @@
-1. asdasda
+1. run server.sh on the server
+  $ chmod server.sh
+  $ ./server.sh
+
+.. done
