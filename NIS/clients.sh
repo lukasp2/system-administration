@@ -13,3 +13,6 @@ sed -ir 's/^shadow:\s*.*$/shadow: compat nis/g' /etc/nsswitch.conf
 sed -ir 's/^hosts:\s*.*$/shadow: files dns nis/g' /etc/nsswitch.conf
 
 systemctl restart nis
+
+echo "ypbind -broadcast" >> ~/.bashrc
+ypbind -broadcast
