@@ -1,4 +1,5 @@
-1. run server.sh on the server
+This lab requires no report. 
+
   $ chmod server.sh
   $ ./server.sh
 
