@@ -14,3 +14,8 @@ The labs should be completed in the following order:
 4. NIS - Network Information Service
 5. STO - Storage
 6. NFS - Network File Systems
+
+Each folder typically contains:
+  1. One or more script (.sh) files.
+  2. One file which describes in what order the scripts are supposed to be executed.
+  3. One testing script.
