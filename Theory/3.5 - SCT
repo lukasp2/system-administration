@@ -1,0 +1,63 @@
+1-1 What is the difference between using $* and $@ to access all parameters to a script or function? Hint: it has to do with how spaces in parameters are handled when $* or $@ are placed within (double) quotation marks (as in the for loop example, below). 
+Report: An example that demonstrates the difference between $* and $@.
+
+Från http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_02.html:	
+The implementation of "$*" has always been a problem and realistically should have been replaced with the behavior of "$@". In almost every case where coders use "$*", they mean "$@". "$*" Can cause bugs and even security holes in your software.
+
+$* kommer att behandla parametrarna som skickas in som en sträng (avgränsade av den första karaktären i $IFS). $@ skapar en array.
+$* och $@ kommer dock att se identiska ut såvida man inte använder citationstecken likt "$@" och "$*".
+
+med skriptet:
+#!/bin/bash
+echo "med: \"$*\":"
+for a in "$*"; do
+  echo $a;
+done;
+
+echo ""
+echo "med: \"$@\":"
+for a in "$@"; do
+  echo $a;
+done;
+
+får vi utskriften:
+med "$*":
+1 2 3 4
+
+med "$@":
+1 
+2 
+3 4
+
+2-1 Why is $@ quoted (inside quotation marks) in the for loop.
+Eftersom $@ hade behandlat varje input som en ociterad sträng så hade ex. "3 4" i exemplet ovan tolkats som två element: 3 och 4.
+Har vi en fil som heter "hej tjabba" så blir det alltså problem.
+
+2-2 Could $* have been used instead of $@? Explain your answer. Hint: if you got exercise 3-1 right, this one should be easy to answer.
+$* hade brutit upp ex. "3 4" till "3" och "4".
+
+3-1 How do while loops work.
+Report: An example that demonstrates how a while loop works.
+
+i="0"
+while [ i -lt 4 ]
+  echo "."
+  i=$[$i+1]
+done
+
+*"./test.sh 1" skriver ut 4 punkter*
+
+5-1 What does ${line:0:1} do? Note that it is a form of parameter expansion.
+
+
+
+https://www.ida.liu.se/~TDDI41/labs/lab5-sct.shtml
+
+
+
+
+
+
+
+
+
