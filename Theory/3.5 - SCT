@@ -48,7 +48,15 @@ done
 *"./test.sh 1" skriver ut 4 punkter*
 
 5-1 What does ${line:0:1} do? Note that it is a form of parameter expansion.
+It evaluates the line variable, on string position 0
 
+5-2 What does a colon on a single line do (the true branch of the if statement in the example).
+
+5-3 Bash has an alternate syntax for command substitution (backticks). What is it.
+
+5-4 What does $(()) do? What is this called in the bash man page.
+
+5-5 How could you count the number of dotfiles using a single pipeline (no loops or variables, just simple commands). You may want to read about commands like grep and wc.
 
 
 https://www.ida.liu.se/~TDDI41/labs/lab5-sct.shtml
