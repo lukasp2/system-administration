@@ -48,16 +48,34 @@ done
 *"./test.sh 1" skriver ut 4 punkter*
 
 5-1 What does ${line:0:1} do? Note that it is a form of parameter expansion.
-It evaluates the line variable, on string position 0
+${parameter:position:offset}
+It evaluates the line variable, on string position 0, offset 1.
 
 5-2 What does a colon on a single line do (the true branch of the if statement in the example).
+Its just means true. It has no purpose but is needed as a conditional block cant be empty in bash
 
 5-3 Bash has an alternate syntax for command substitution (backticks). What is it.
+$()
 
 5-4 What does $(()) do? What is this called in the bash man page.
+Its an arithmetic expansion, it allows for evaluation of arithmatic expressions.
 
 5-5 How could you count the number of dotfiles using a single pipeline (no loops or variables, just simple commands). You may want to read about commands like grep and wc.
+ls -Al | grep -sce .* | wc -l
 
+6-1 Look at the first two lines of the script (after the initial "#!" line).
+
+a) What does the backslash at the end of the first of these mean.
+It escapes the newline
+
+b) What do the braces around echo and exit mean? What would happen if you used parenthesis instead of braces.
+Both echo and exit will be executed if it gets to that point. If we didnt have the braces, the program would always exit.
+
+6-2 What does the local command do at the beginning of smtp_send.
+Its a local variable
+
+6-3 Why call sleep 1 in the script.
+To not overflow socat?
 
 https://www.ida.liu.se/~TDDI41/labs/lab5-sct.shtml
 
