@@ -1,8 +1,16 @@
 11-1 Why is RAID 1+0 generally considered more reliable than RAID 0+1.
+see this website:
+https://www.thegeekstuff.com/2011/10/raid10-vs-raid01/
 
+I RAID 1+0 there are many groups, even if three disks fail (in the example) RAID 1+0 can still be functional. In RAID 01 there are fewer groups and hence less margin for errors.
 
 11-2 As individual disk sizes grow, RAID-5 is no longer considered useful, and RAID-6 is also rapidly becoming obsolete. Why.
+RAID 5 and RAID 6 are similar, but RAID 6 boasts a higher data integrity than RAID 5. Both versions however suffers from lack of performance as of its complexity, and space has been sacrificed in an attempt to improve security.
 
 11-3 What is the point of the file system journal in e.g. ext3.
+Journaling eliminates the need for a file system check after an unclean shutdown.
 
 11-4 Explain the purpose of using a volume manager, like LVM.
+- Disks can be added/replaced without system downtime.
+- Enables backups by snapshots.
+- Encrypting multiple partitions with only one password
