@@ -18,3 +18,13 @@ More secure and reliable. Every timestamp is guaranteed to occur exactly once.
   -193.11.166.8    .PPS.            1 u   63 1024  377    5.745    0.519   0.028
 
 * = current timestamp
+remote = target of sync
+refid = remote source's sync source
+st = stratum level of source
+t = types available (u = unicast)
+when = time since last received packet
+poll = poll interval (log2 seconds)
+reach = Octal binary history of packets
+delay = roundtrip delay
+offset = server time difference (ms)
+jitter = difference in milliseconds between two samples
