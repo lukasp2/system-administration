@@ -40,3 +40,37 @@ traceroute to 8.8.8.8 (8.8.8.8), 30 hops max, 60 byte packets
 
 The first column is the current node that the packets are at (three of the same packets are sent). The second to fourth column is the time between this node and the previous one. As we can see, we start at my home router and make our way to googles DNS server in around 10.2 ms.
 
+b) How do you display the current routing table
+ip route
+
+a) What is a sysctl (not what does the command do, but what a sysctl actually is).
+It is the control of kernel parameters at runtime.
+
+b) In what file can you place sysctl values so they are loaded at boot time.
+/etc/sysctl.conf
+
+c) Which sysctl controls IP forwarding.
+net.ipv4.ip_forward
+
+1-6 Explain the difference between routing and forwarding (as related to IP networking).
+Routing is the directing of packets, or finding the path. Forwarding is just sending them to the next node.
+
+7-1 Answer the following questions.
+a) What configuration file controls NSS.
+/etc/nsswitch.conf
+
+b) What configuration file controls the resolver.
+/etc/resolv.conf
+
+c) What does the "search" keyword in the resolver configuration file do.
+When no FQDN is provided, the search will resolve the issue.
+
+7-2 Configure the resolver on all systems to use 130.236.1.9 as its name server.
+Ok. Adding 130.236.1.9 to /etc/resolv.conf
+
+7-3 Configure the name service switch on all systems to use DNS as a source for host names.
+Ok. "hosts: files dns" set in /etc/nsswitch.conf
+
+
+
+
