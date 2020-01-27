@@ -1,10 +1,11 @@
 2-1 Why use a directory service? Name one alternative to a directory service.
-
+It allows for organizing and sharing of files. Reduces data redundancy.
 
 2-2 Name at least two common directory services other than NIS.
+DNS, NT Domains
 
 5-1 What is the difference between using "compat" and using "files nis" as the list of sources for e.g. passwords in the name service switch.
-
-5-2 Configure the name service switch on your clients so they use NIS for as much as possible. Note that you should still use local files as the first information source. Please do not use compat unless you intend to use the special features it provides.
+Compat allows for partial fetches of a NIS-map (rows and columns).
 
 5-3 Why should you use local files as the first information source instead of NIS.
+
