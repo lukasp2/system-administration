@@ -1,0 +1,42 @@
+1-1 Review the documentation for the ping utility and answer the following questions.
+a) What is the ping utility used for.
+Mainly to check connection between two hosts.
+
+b) What command-line option to ping causes it to print numerical addresses.
+-n
+
+c) How does the ping utility work.
+It sends packets addressed to the destination, if it reaches the destination ping will echo additional information.
+
+from man page:
+ping uses the ICMP protocol's mandatory ECHO_REQUEST datagram to elicit an ICMP ECHO_RESPONSE from a host or gateway.
+
+d) How can you detect if the host 10.17.1.1 is up.
+ping 10.17.1.1
+If we get a response, it is definately up, if not, it might be up.
+
+1-2 Review the documentation for the traceroute utility and answer the following questions.
+a) What is the traceroute utility used for.
+Check the path packets take to the destination.
+
+b) How does traceroute work.
+It sends packets over the network with increasing TTL. Each time a packet reaches a router, it will send a packet back to the host letting it know it just passed that router.
+
+c) What command-line option causes traceroute to print numerical addresses.
+-n
+
+d) Use traceroute with a remote host of your choosing as the target. Explain all the output.
+traceroute to 8.8.8.8 (8.8.8.8), 30 hops max, 60 byte packets
+ 1  router.asus.com (192.168.1.1)  1.827 ms  2.074 ms  3.461 ms
+ 2  46.59.117.195 (46.59.117.195)  6.616 ms  7.015 ms  6.979 ms
+ 3  a163-gw.bahnhof.net (46.59.117.193)  50.106 ms  50.197 ms  50.306 ms
+ 4  lin-lk-dr1.sto-cr4.bahnhof.net (46.59.113.28)  9.605 ms  9.597 ms  9.608 ms
+ 5  sto-cr4.sto-cr3.bahnhof.net (46.59.112.140)  10.531 ms  10.494 ms  10.446 ms
+ 6  sto-cr3.sto-tlc-er1.bahnhof.net (46.59.113.179)  10.406 ms  5.995 ms  5.195 ms
+ 7  209.85.174.232 (209.85.174.232)  6.980 ms  7.782 ms  7.746 ms
+ 8  108.170.253.177 (108.170.253.177)  10.639 ms 108.170.253.161 (108.170.253.161)  10.523 ms 108.170.254.49 (108.170.254.49)  10.476 ms
+ 9  74.125.252.63 (74.125.252.63)  7.501 ms 209.85.246.57 (209.85.246.57)  10.480 ms 209.85.246.27 (209.85.246.27)  10.428 ms
+10  dns.google (8.8.8.8)  10.309 ms  10.274 ms  10.240 ms
+
+The first column is the current node that the packets are at (three of the same packets are sent). The second to fourth column is the time between this node and the previous one. As we can see, we start at my home router and make our way to googles DNS server in around 10.2 ms.
+
