@@ -8,4 +8,4 @@ DNS, NT Domains
 Compat allows for partial fetches of a NIS-map (rows and columns).
 
 5-3 Why should you use local files as the first information source instead of NIS.
-
+It allows for keeping all search specifications within one system file. You can also override the NIS server with local information.
