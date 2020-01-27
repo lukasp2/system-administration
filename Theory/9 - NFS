@@ -1,0 +1,8 @@
+2-1 Explain what the automounter is and how it works.
+The automounter automatically mounts file systems at access.
+
+2-2 Explain what an automount map is, and the difference between direct and indirect maps.
+The automount map stores information about which mount points to monitor and which filesystems to mount. 
+
+2-3 What is the purpose of an automounter? Why not use static network mounts instead.
+Its easier to handle and saves resources.
