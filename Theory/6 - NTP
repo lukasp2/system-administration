@@ -8,3 +8,13 @@ Each level in the clock hierarchy is termed a stratum. The hierarchy is much mor
 More secure and reliable. Every timestamp is guaranteed to occur exactly once.
 
 3-3 Explain the output of ntpq -p.
+  ntpq -p
+       remote           refid      st t when poll reach   delay   offset  jitter
+  ==============================================================================
+  +ntp.liu.se      .GPS.            1 u  632 1024  377    0.231    0.147   0.038
+  *ntp.liu.se      .GPS.            1 u  300 1024  377    1.823    0.426   0.797
+  +sth1.ntp.se     .PPS.            1 u  625 1024  377    3.420    0.181   0.046
+  -mmo1.ntp.se     .PPS.            1 u  284 1024  377    6.688    0.530   0.043
+  -193.11.166.8    .PPS.            1 u   63 1024  377    5.745    0.519   0.028
+
+* = current timestamp
