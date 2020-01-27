@@ -24,33 +24,36 @@ g) How does the DNS protocol indicate if an answer comes from an authoritative n
 2. The RD bit is set.
 
 h) Explain what glue records are and when they are necessary.
-
+A Glue Record is the IP Address of a name server at a domain name registry, they help resolve DNS servers at a core level. When you change the name of a nameserver, you have to provide the glue record for that nameserver, others trying to access the renamed nameserver would otherwise never find it.
 
 1-3 Which zone in DNS contains PTR records corresponding to IP addresses in the network 10.131.24.64/27? Name some other networks that have PTR records in the same zone. What is the problem with delegating authority over the DNS records corresponding only to 10.131.24.64/27.
+
 
 1-4 Explain the purpose of classless in-addr.arpa delegation. Explain how it works.
 
 --
 
 2-1 Use the host tool to answer the following questions.
-
 a) What is the address of informatix.ida.liu.se.
+130.236.180.77
 
 b) What is the address of www.ida.liu.se.
+130.236.180.77
 
 c) What is the address of liu.se.
+130.236.5.66
 
 2-2 Compare the output of host www.ida.liu.se ns3.liu.se and host www.ida.liu.se dns.liu.se and answer the following questions.
-
 a) Why is there no answer in the first query but in the second query.
+Im getting an answer in both, so I dont know.
 
 b) Both answers are correct, even though they differ. Explain why.
-
-Report: Answers to the questions above. With additional command line options, host can be used to extract other information from the domain name system. The full details are in the man page for host. The following are some of the more common and useful options (these apply to the BIND 9 version of host; earlier versions have slightly different options.
+They both can be correct but different because www.ida.se is within the domain of dns.liu.se but not within the zone of ns3.liu.se.
 
 -- 
 
 3-1 Use host to find out which name servers are authoritative for the zone adlibris.se. Which organization(s) operate them.
+host -C adlibris.se
 
 3-2 Use host to list all records in the ida.liu.se zone and wc to count them. How many records are there? If this is temporarily unavailable (181017), go on through the tasks.
 
