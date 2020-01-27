@@ -30,6 +30,7 @@ A Glue Record is the IP Address of a name server at a domain name registry, they
 
 
 1-4 Explain the purpose of classless in-addr.arpa delegation. Explain how it works.
+It is a way to delegate on non-octet boundaries for address spaces covering fewer than 256 addresses. It makes it possible to assign IP address spaces in smaller chunks than 24 bit prefixes. Authorities can use CNAMEs to insert subdomains that can then be delegated.
 
 --
 
@@ -90,26 +91,48 @@ host -a ida.liu.se:
         Received 224 bytes from 130.236.1.9#53 in 0 ms
         lukpo970@tlhw-4-3:~$
 
-Not much here. 
-
-Report: The commands used above and answers to the questions.
+A: Used to point a domain or subdomain to an IPv4 address.
+AAAA: Same as A but for IPv6
+MX: Mail exchanger, used to help route email to the email server.
+NS: Specifies an authoritative name server for given host.
 
 --
 4-1 Use dig to answer the following questions. If the tests below fail, do this for www.ida.liu.se.
-
 a) What is the address of parlomba1.ida.liu.se.
+;; ANSWER SECTION:
+www.ida.liu.se.		225	IN	CNAME	informatix.ida.liu.se.
+informatix.ida.liu.se.	26672	IN	A	130.236.180.77
+
+=> 130.236.180.77
 
 b) Which nameservers have authoritative information for parlomba1.ida.liu.se.
+dig parlomba1.ida.liu.se
+            ;; AUTHORITY SECTION:
+            ida.liu.se.		248	IN	SOA	ns.ida.liu.se. domainmaster.ida.liu.se. 2020012203 21600 3600 3600000 600
+
+=> ns.ida.liu.se
 
 c) Which name corresponds to the IPv4 address 130.236.180.77.
+dig -x 130.236.180.77
+
+            ;; QUESTION SECTION:
+            ;77.180.236.130.in-addr.arpa.	IN	PTR
+
+            ;; ANSWER SECTION:
+            77.180.236.130.in-addr.arpa. 30869 IN	PTR	informatix.ida.liu.se.
 
 4-2 Use the trace feature of dig to answer the following questions.
-
 a) What nameservers are consulted in a query for the A record of www.ida.liu.se.
+dig www.ida.liu.se A +trace
+[a-m].root-servers.net
+[a-c].ns.se
+sunic.sunset.se
+ns[1-4].liu.se
+...
 
 b) What nameservers are consulted when determining the address of update.microsoft.com? Note that the presence of a CNAME record makes this question different from the previous one: you will need to run dig more than once to get the answer.
-
-Report: Answers to all the questions above, including the commands used.
+dig update.microsoft.com +trace
+ns[1-4].msft.net
 
 
 
