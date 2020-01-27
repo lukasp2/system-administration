@@ -52,12 +52,45 @@ They both can be correct but different because www.ida.se is within the domain o
 
 -- 
 
-3-1 Use host to find out which name servers are authoritative for the zone adlibris.se. Which organization(s) operate them.
-host -C adlibris.se
+3-1 Use host to find out which name servers are authoritative for the zone adlibris.se. 
+host -a adlibris.se
+      ;; AUTHORITY SECTION:
+      adlibris.se.		86400	IN	NS	dns02.ports.se.
+      adlibris.se.		86400	IN	NS	dns01.dipcon.com.
+      adlibris.se.		86400	IN	NS	dns04.ports.net.
+      adlibris.se.		86400	IN	NS	dns03.ports.se.
+
+Which organization(s) operate them.
+ports.net, dipcon.com
 
 3-2 Use host to list all records in the ida.liu.se zone and wc to count them. How many records are there? If this is temporarily unavailable (181017), go on through the tasks.
+It fails, the command would maybe be something like 
+host -a -l ida.liu.se | wc -l
 
 3-3 Use host to find out all information you can about the name ida.liu.se (i.e. the name itself, not the contents of the zone). What did you find out? How can you be sure that is all the information that is available.
+host -a ida.liu.se:
+        lukpo970@tlhw-4-3:~$ host -a ida.liu.se
+        Trying "ida.liu.se"
+        ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 41614
+        ;; flags: qr rd ra; QUERY: 1, ANSWER: 8, AUTHORITY: 0, ADDITIONAL: 0
+
+        ;; QUESTION SECTION:
+        ;ida.liu.se.			IN	ANY
+
+        ;; ANSWER SECTION:
+        ida.liu.se.		5316	IN	AAAA	2001:6b0:17:f032::80
+        ida.liu.se.		493	IN	MX	10 v-mailfilter03.sunet.se.
+        ida.liu.se.		493	IN	MX	10 e-mailfilter03.sunet.se.
+        ida.liu.se.		493	IN	MX	10 e-mailfilter04.sunet.se.
+        ida.liu.se.		37919	IN	A	130.236.180.77
+        ida.liu.se.		3684	IN	NS	ns.ida.liu.se.
+        ida.liu.se.		3684	IN	NS	ns2.liu.se.
+        ida.liu.se.		3684	IN	NS	ns1.liu.se.
+
+        Received 224 bytes from 130.236.1.9#53 in 0 ms
+        lukpo970@tlhw-4-3:~$
+
+Not much here. 
 
 Report: The commands used above and answers to the questions.
 
