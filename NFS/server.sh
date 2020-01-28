@@ -2,12 +2,19 @@
 
 # Exercise 3: Configure a file server
 # 3-1 install portmap
-apt-get -y install nfs-kernel-server portmap
+apt-get -y install autofs nfs-kernel-server portmap
 
-# 3-2 export /usr/local to clients on 10.0.0.X
+# 3-2 export /usr/local to clients on 10.0.0.X [...]
 echo "/usr/local 10.0.0.3(rw) 10.0.0.4(rw)" >> /etc/exports
 exportfs -a
 /etc/init.d/nfs-kernel-server reload
+
+# [...] it must not be possible to access /usr/local from any other system. Your server must not treat root users on the client as root on the exported file system.
+sed -i '/^portmap/d' /etc/hosts.allow
+echo -e "portmap: 10.0.0./255.255.255.248\nportmap:\t127.0.0.1" >> /etc/hosts.allow
+
+sed -i '/^portmap/d' /etc/hosts.deny
+echo "portmap: 0.0.0.0" >> /etc/hosts.deny
 
 # 3-3 Clients automatically mount /usr/local from the server at boot (not necessarily with /usr/local as mount point)
 ...
@@ -35,7 +42,7 @@ exportfs -a
 ...
 
 # 5-1 Install an automounter on the clients and on the server. The autofs package is recommended. [...]
-apt-get -y install autofs
+# already done
 
 # 5-2 Configure the automounter so it mounts /home/USERNAME from the user's real home directory (on the NFS server). Make /home an indirect mount point - that is, the automounter will automatically mount subdirectories of /home, but not /home itself. You will probably need one line per user in the configuration file.
 ...
