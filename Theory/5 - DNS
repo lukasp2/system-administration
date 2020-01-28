@@ -26,8 +26,14 @@ g) How does the DNS protocol indicate if an answer comes from an authoritative n
 h) Explain what glue records are and when they are necessary.
 A Glue Record is the IP Address of a name server at a domain name registry, they help resolve DNS servers at a core level. When you change the name of a nameserver, you have to provide the glue record for that nameserver, others trying to access the renamed nameserver would otherwise never find it.
 
-1-3 Which zone in DNS contains PTR records corresponding to IP addresses in the network 10.131.24.64/27? Name some other networks that have PTR records in the same zone. What is the problem with delegating authority over the DNS records corresponding only to 10.131.24.64/27.
+1-3 Which zone in DNS contains PTR records corresponding to IP addresses in the network 10.131.24.64/27? 
+10.131.in-addr.arpa
 
+Name some other networks that have PTR records in the same zone. 
+10.131.24.64/24 -> 10.131.24.64/32
+
+What is the problem with delegating authority over the DNS records corresponding only to 10.131.24.64/27.
+The problem is with delegating zones in smaller chunks than 24 bit prefixes. Solved by classless in-addr.arpa delegation.
 
 1-4 Explain the purpose of classless in-addr.arpa delegation. Explain how it works.
 It is a way to delegate on non-octet boundaries for address spaces covering fewer than 256 addresses. It makes it possible to assign IP address spaces in smaller chunks than 24 bit prefixes. Authorities can use CNAMEs to insert subdomains that can then be delegated.
