@@ -17,7 +17,9 @@ sed -i '/^portmap/d' /etc/hosts.deny
 echo "portmap: 0.0.0.0" >> /etc/hosts.deny
 
 # 3-3 Clients automatically mount /usr/local from the server at boot (not necessarily with /usr/local as mount point)
-...
+# also see clients.sh, should this be here too?
+# sed -i '/automount/d' /etc/nsswitch.conf
+# echo -e "automount:\tfiles nis" >> /etc/nsswitch.conf
 
 # 4: The automounter
 # Create /home1 and /home2 directories for two users.
