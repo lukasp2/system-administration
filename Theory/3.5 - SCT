@@ -37,15 +37,13 @@ Har vi en fil som heter "hej tjabba" så blir det alltså problem.
 $* hade brutit upp ex. "3 4" till "3" och "4".
 
 3-1 How do while loops work.
-Report: An example that demonstrates how a while loop works.
-
 i="0"
 while [ i -lt 4 ]
   echo "."
   i=$[$i+1]
 done
 
-*"./test.sh 1" skriver ut 4 punkter*
+*"./test.sh 1" prints 4 punkter*
 
 5-1 What does ${line:0:1} do? Note that it is a form of parameter expansion.
 ${parameter:position:offset}
@@ -64,7 +62,6 @@ Its an arithmetic expansion, it allows for evaluation of arithmatic expressions.
 ls -Al | grep -sce .* | wc -l
 
 6-1 Look at the first two lines of the script (after the initial "#!" line).
-
 a) What does the backslash at the end of the first of these mean.
 It escapes the newline
 
@@ -76,8 +73,6 @@ Its a local variable
 
 6-3 Why call sleep 1 in the script.
 To not overflow socat?
-
-https://www.ida.liu.se/~TDDI41/labs/lab5-sct.shtml
 
 
 
