@@ -2,8 +2,10 @@
   $ chmod +x server.sh
   $ ./server.sh
   
-2. 
-
+2.  Run clients.sh on the clients
+  $ chmod +x clients.sh
+  $ ./clients.sh
+  
 .. done
 
 reference website: https://wiki.debian.org/NFSServerSetup
