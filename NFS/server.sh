@@ -18,26 +18,16 @@ echo "portmap: 0.0.0.0" >> /etc/hosts.deny
 
 # 3-3 Clients automatically mount /usr/local from the server at boot (not necessarily with /usr/local as mount point)
 # also see clients.sh, should this be here too?
-# sed -i '/automount/d' /etc/nsswitch.conf
-# echo -e "automount:\tfiles nis" >> /etc/nsswitch.conf
+sed -i '/automount/d' /etc/nsswitch.conf
+echo -e "automount:\tfiles nis" >> /etc/nsswitch.conf
 
 # 4: The automounter
-# Create /home1 and /home2 directories for two users.
-...
-
-# 4-2 Create two new users.
-...
-
-# Move one user's home directory to /home2/USERNAME
-...
-
-# Move the other user's home directory to /home1/USERNAME
-...
+# 4-2 Create two new users. Create /home1 and /home2 directories for the two users. Move one user's home directory to /home1/USERNAME and other user's home directory to /home2/USERNAME
+# see test script
 
 # Note: Ensure that no home directories remain in /home. Do not change the home directory location in the user database.
 
 # 4-3 Configure your NFS server to export /home1 and /home2 with the appropriate permissions to your clients (and only your clients)
-...
 
 # 5: Configure the automounter
 # [WARNING] reorder the boot sequence so that nis starts before autofs (see course website)
@@ -50,6 +40,6 @@ echo "portmap: 0.0.0.0" >> /etc/hosts.deny
 ...
 
 # (5-3 Verify that all users can log on to the client and that the correct home directories are mounted.)
-
+# see test script
 
 
