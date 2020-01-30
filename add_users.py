@@ -14,6 +14,13 @@ def create_users(file):
   for name in names:
     if name != '':
       create_user(name)
+      
+  bash = "exportfs -v -r"
+  output = os.popen(bash).read()
+  time.sleep(0.2)  
+  
+  bash = "make -C /var/yp"
+  os.popen(bash).read()
 
 def create_user(name):
   name = name.lower().split()
