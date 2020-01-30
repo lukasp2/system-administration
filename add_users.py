@@ -1,4 +1,5 @@
 
+#!/usr/bin/python
 import time
 import sys
 import subprocess
@@ -8,7 +9,7 @@ from random import randint
 import random
 
 def create_users(file):
-  f = open(file, 'r')
+  #f = open(file, 'r')
   names = [line.strip('\n') for line in open(file, 'r')]
 
   for name in names:
@@ -26,18 +27,28 @@ def create_user(name):
   name = name.lower().split()
   fname = name[0][0:3]
   lname = name[1][0:2]
-  username = fname + lname + generate_numbers(username)
+
+  username = fname + lname
+  username = generate_numbers(username)
   password = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(8))
+
+  print "added user:"
+  print "name:\t", name[0], name[1]
+  print "id:\t", username
+  print "pswd:\t", password
+  print '\n'
   create_home(name, username, password)
   
 def generate_numbers(username):
   bash = "grep -oE ^" + username + "[0-9]{3} /etc/passwd | sort -r | head -n 1"
   output = os.popen(bash).read()
   
-  if (output == '')
+  if (output == ''):
     username = username + "000"
-  else
-    username = username + (str(int(output[5:8]) + 1)
+  else:
+    username = username + (str(int(output[5:8]) + 1))
+
+  return username
 
 def create_home(name, username, password):
   bash = "adduser " + username + " --no-create-home" + " --gecos '" + name + "' --disabled-password"
@@ -65,7 +76,9 @@ def create_home(name, username, password):
   with open("/etc/auto.home", "a") as myfile:
       myfile.write(username + " -fstype=nfs,nfsvers=3,rw,sync server:/home" + home_str + "/" + username + "\n")
 
+## MAIN ##
 if (len(sys.argv) != 2):
-  print("Usage: python add_user.py <filename>")
+  print("Usage: python add_user.py <filename>") 
 else:
   create_users(sys.argv[1])
+
