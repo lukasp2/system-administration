@@ -1,8 +1,8 @@
 #!/bin/bash
 
-apt-get -y install autofs
+apt-get -y install autofs nfs-client nfs-utils nfs-utils-lib
 
-apt-get -y install nfs-client
+chkconfig --level 35 nfs on
 
 # 3-3 Clients automatically mount /usr/local from the server at boot (not necessarily with /usr/local as mount point)
 sed -i '/automount/d' /etc/nsswitch.conf
