@@ -11,6 +11,7 @@ sed -i '/auto\.master/d' /etc/auto.master
 apt-get -y install nfs-kernel-server
 
 # 3-2 Configure your server to export the /usr/local directory to all clients [...]
+# ALSO CREATE /usr/local ?? """"""""""""""""""""""""
 echo "/usr/local 10.0.0.3(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 echo "/usr/local 10.0.0.4(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 
@@ -19,11 +20,12 @@ echo "portmap: 10.0.0./255.255.255.248\nportmap: 127.0.0.1" >> /etc/hosts.allow
 echo "portmap: 0.0.0.0" >> /etc/hosts.deny
 
 # 3-3 Clients automatically mount /usr/local from the server at boot (not necessarily with /usr/local as mount point)
-# also see clients.sh
 # see clients.sh
 
 # 4: The automounter
 # 4-2 Create two new users. Create /home1 and /home2 directories for the two users. Move one user's home directory to /home1/USERNAME and other user's home directory to /home2/USERNAME
+mkdir /home1
+mkdir /home2
 # see test script
 
 # Note: Ensure that no home directories remain in /home. Do not change the home directory location in the user database.
@@ -51,6 +53,8 @@ sed -i "s/^ALL\ =.*/ALL\ =\ \ ${maps}/" /var/yp/Makefile
 apt-get -y install autofs
 
 # 5-2 Configure the automounter so it mounts /home/USERNAME from the user's real home directory (on the NFS server). Make /home an indirect mount point - that is, the automounter will automatically mount subdirectories of /home, but not /home itself. You will probably need one line per user in the configuration file.
+echo -e "/home\t\t auto.home" > /etc/auto.master
+echo -e "/usr/local\t auto.local" >> /etc/auto.master
 echo -e "+auto.master" >> /etc/auto.master
 
 # (5-3 Verify that all users can log on to the client and that the correct home directories are mounted.)
