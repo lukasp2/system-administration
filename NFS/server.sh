@@ -9,17 +9,18 @@ sed -i '/auto\.master/d' /etc/auto.master
 # Exercise 3: Configure a file server
 # 3-1 Set your server up as a file server using NFS (or the network file system of your choice).
 apt-get -y install nfs-kernel-server
+
+# 3-2 Configure your server to export the /usr/local directory to all clients [...]
+echo "/usr/local 10.0.0.3(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
+echo "/usr/local 10.0.0.4(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
+
+# [...] It must not be possible to access /usr/local from any other system. Your server must not treat root users on the client as root on the exported file system. 
 echo "portmap: 10.0.0./255.255.255.248\nportmap: 127.0.0.1" >> /etc/hosts.allow
 echo "portmap: 0.0.0.0" >> /etc/hosts.deny
 
-# 3-2 Configure your server to export the /usr/local directory to all clients. It must not be possible to access /usr/local from any other system. Your server must not treat root users on the client as root on the exported file system. 
-echo -e "/home\t\t auto.home" > /etc/auto.master
-echo -e "/usr/local\t auto.local" >> /etc/auto.master
-echo -e "*\t -fstype=nfs,vers=3 server.${DDNAME}:${exproot}/local/&" > /etc/auto.local
-
 # 3-3 Clients automatically mount /usr/local from the server at boot (not necessarily with /usr/local as mount point)
 # also see clients.sh
-echo -e "automount:\tfiles nis" >> /etc/nsswitch.conf
+# see clients.sh
 
 # 4: The automounter
 # 4-2 Create two new users. Create /home1 and /home2 directories for the two users. Move one user's home directory to /home1/USERNAME and other user's home directory to /home2/USERNAME
