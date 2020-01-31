@@ -40,7 +40,6 @@ echo "/srv/nfs/home1/ ${c1}${mntopts} ${c2}${mntopts}" >> /etc/exports
 echo "/srv/nfs/home2/ ${c1}${mntopts} ${c2}${mntopts}" >> /etc/exports
 
 sed -i "s/^ALL\ =.*/ALL\ =\ \ ${maps}/" /var/yp/Makefile
-print_info "${Yellow}NFS server restart${Reset}"
 
 /etc/init.d/nfs-kernel-server restart
   
