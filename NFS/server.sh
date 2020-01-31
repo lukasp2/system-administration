@@ -11,7 +11,6 @@ sed -i '/auto\.master/d' /etc/auto.master
 apt-get -y install nfs-kernel-server
 
 # 3-2 Configure your server to export the /usr/local directory to all clients [...]
-# ALSO CREATE /usr/local ?? """"""""""""""""""""""""
 echo "/usr/local 10.0.0.3(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 echo "/usr/local 10.0.0.4(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 
@@ -24,9 +23,21 @@ echo "portmap: 0.0.0.0" >> /etc/hosts.deny
 
 # 4: The automounter
 # 4-2 Create two new users. Create /home1 and /home2 directories for the two users. Move one user's home directory to /home1/USERNAME and other user's home directory to /home2/USERNAME
-mkdir /home1
-mkdir /home2
-# see test script
+folders=( "local" "home1" "home2" )
+for folder in ${folders[@]}; do
+  [[ ! -d /srv/nfs/${folder} ]] && mkdir -p /srv/nfs/${folder}
+done
+
+# make sure the mount survives a reboot
+sed -i '/srv/d' /etc/fstab
+echo "/usr/local/ /srv/nfs/local none bind,defaults 0 0" >> /etc/fstab
+echo "/home1/ /srv/nfs/home1 none bind,defaults 0 0" >> /etc/fstab
+echo "/home2/ /srv/nfs/home2 none bind,defaults 0 0" >> /etc/fstab
+
+for folder in ${folders[@]}; do
+  umount /srv/nfs/${folder}
+  mount /srv/nfs/${folder}
+done
 
 # Note: Ensure that no home directories remain in /home. Do not change the home directory location in the user database.
 
@@ -35,11 +46,12 @@ mntopt="rw,sync,no_root_squash,no_subtree_check"
 mntopts="(${mntopt})"
 mntrootopts="(fsid=0,${mntopt})"
 
-echo "/srv/nfs/ ${c1}${mntrootopts} ${c2}${mntrootopts}" >> /etc/exports
-echo "/srv/nfs/local/ ${nw}.${STARTADDRESS}/29${mntopts}" >> /etc/exports
+echo "/srv/nfs/ ${c1}${mntrootopts} ${c2}(fsid=0,(rw,sync,no_root_squash,no_subtree_check))" >> /etc/exports
 
-echo "/srv/nfs/home1/ ${c1}${mntopts} ${c2}${mntopts}" >> /etc/exports
-echo "/srv/nfs/home2/ ${c1}${mntopts} ${c2}${mntopts}" >> /etc/exports
+echo "/srv/nfs/local/ ${nw}.${STARTADDRESS}/29(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
+echo "/srv/nfs/home1/ ${c1}${mntopts} ${c2}(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
+echo "/srv/nfs/home2/ ${c1}${mntopts} ${c2}(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
+exportfs -rav
 
 sed -i "s/^ALL\ =.*/ALL\ =\ \ ${maps}/" /var/yp/Makefile
 
