@@ -5,14 +5,15 @@ sed -i '/^nportmap/d' /etc/hosts.allow
 sed -i '/^portmap/d' /etc/hosts.deny
 sed -i '/^automount/d' /etc/nsswitch.conf
 sed -i '/auto\.master/d' /etc/auto.master
+sed -i '/srv/d' /etc/fstab
 
 # Exercise 3: Configure a file server
 # 3-1 Set your server up as a file server using NFS (or the network file system of your choice).
 apt-get -y install nfs-kernel-server
 
 # 3-2 Configure your server to export the /usr/local directory to all clients [...]
-echo "/usr/local 10.0.0.3(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-echo "/usr/local 10.0.0.4(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
+permissions="(rw,sync,no_root_squash,no_subtree_check)"
+echo "/usr/local 10.0.0.3${permissions} 10.0.0.4${permissions}" >> /etc/exports
 
 # [...] It must not be possible to access /usr/local from any other system. Your server must not treat root users on the client as root on the exported file system. 
 echo "portmap: 10.0.0./255.255.255.248\nportmap: 127.0.0.1" >> /etc/hosts.allow
@@ -26,37 +27,24 @@ echo "portmap: ALL" >> /etc/hosts.deny
 mkdir -p /srv/nfs/home1
 mkdir -p /srv/nfs/home2
 
-#folders=( "local" "home1" "home2" )
-#for folder in ${folders[@]}; do
-#  mkdir -p /srv/nfs/${folder}
-#done
-
-# make sure the mount survives a reboot
-sed -i '/srv/d' /etc/fstab
-#echo "/usr/local/ /srv/nfs/local none bind,defaults 0 0" >> /etc/fstab
+# make sure the mount survives a reboot by adding to /etc/fstab
 echo "/home1/ /srv/nfs/home1 none bind,defaults 0 0" >> /etc/fstab
 echo "/home2/ /srv/nfs/home2 none bind,defaults 0 0" >> /etc/fstab
 
 umount /srv/nfs/home1
 umount /srv/nfs/home2
 
-#for folder in ${folders[@]}; do
-#  umount /srv/nfs/${folder}
-#  mount /srv/nfs/${folder}
-#done
+mount /srv/nfs/home1
+mount /srv/nfs/home2
 
 # Note: Ensure that no home directories remain in /home. Do not change the home directory location in the user database.
 
 # 4-3 Configure your NFS server to export /home1 and /home2 with the appropriate permissions to your clients (and only your clients)
-mntopt="rw,sync,no_root_squash,no_subtree_check"
-mntopts="(${mntopt})"
-mntrootopts="(fsid=0,${mntopt})"
+echo "/srv/nfs/ 10.0.0.3(fsid=0,${permissions}) 10.0.0.4(fsid=0,${permissions})" >> /etc/exports
 
-echo "/srv/nfs/ ${c1}${mntrootopts} ${c2}(fsid=0,(rw,sync,no_root_squash,no_subtree_check))" >> /etc/exports
-
-echo "/srv/nfs/local/ ${nw}.${STARTADDRESS}/29(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-echo "/srv/nfs/home1/ ${c1}${mntopts} ${c2}(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-echo "/srv/nfs/home2/ ${c1}${mntopts} ${c2}(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
+echo "/srv/nfs/local/ ${nw}.${STARTADDRESS}/29${permissions}" >> /etc/exports
+echo "/srv/nfs/home1/ 10.0.0.3${permissions}" >> /etc/exports
+echo "/srv/nfs/home2/ 10.0.0.4${permissions}" >> /etc/exports
 exportfs -rav
 
 sed -i "s/^ALL\ =.*/ALL\ =\ \ ${maps}/" /var/yp/Makefile
