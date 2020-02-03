@@ -10,10 +10,12 @@ sed -i '/srv/d' /etc/fstab
 # Exercise 3: Configure a file server
 # 3-1 Set your server up as a file server using NFS (or the network file system of your choice).
 apt-get -y install nfs-kernel-server
+modprobe nfs
 
 # 3-2 Configure your server to export the /usr/local directory to all clients [...] Your server must not treat root users on the client as root on the exported file system.
 permissions="(rw,sync,no_root_squash,no_subtree_check)"
 echo "/usr/local 10.0.0.3${permissions} 10.0.0.4${permissions}" >> /etc/exports
+exportfs -rav
 
 # 3-2 [...] It must not be possible to access /usr/local from any other system. [...]
 echo "portmap: 10.0.0./255.255.255.248\nportmap: 127.0.0.1" >> /etc/hosts.allow
