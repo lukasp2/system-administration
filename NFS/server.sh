@@ -16,28 +16,34 @@ echo "/usr/local 10.0.0.4(rw,sync,no_root_squash,no_subtree_check)" >> /etc/expo
 
 # [...] It must not be possible to access /usr/local from any other system. Your server must not treat root users on the client as root on the exported file system. 
 echo "portmap: 10.0.0./255.255.255.248\nportmap: 127.0.0.1" >> /etc/hosts.allow
-echo "portmap: 0.0.0.0" >> /etc/hosts.deny
+echo "portmap: ALL" >> /etc/hosts.deny
 
 # 3-3 Clients automatically mount /usr/local from the server at boot (not necessarily with /usr/local as mount point)
 # see clients.sh
 
 # 4: The automounter
 # 4-2 Create two new users. Create /home1 and /home2 directories for the two users. Move one user's home directory to /home1/USERNAME and other user's home directory to /home2/USERNAME
-folders=( "local" "home1" "home2" )
-for folder in ${folders[@]}; do
-  [[ ! -d /srv/nfs/${folder} ]] && mkdir -p /srv/nfs/${folder}
-done
+mkdir -p /srv/nfs/home1
+mkdir -p /srv/nfs/home2
+
+#folders=( "local" "home1" "home2" )
+#for folder in ${folders[@]}; do
+#  mkdir -p /srv/nfs/${folder}
+#done
 
 # make sure the mount survives a reboot
 sed -i '/srv/d' /etc/fstab
-echo "/usr/local/ /srv/nfs/local none bind,defaults 0 0" >> /etc/fstab
+#echo "/usr/local/ /srv/nfs/local none bind,defaults 0 0" >> /etc/fstab
 echo "/home1/ /srv/nfs/home1 none bind,defaults 0 0" >> /etc/fstab
 echo "/home2/ /srv/nfs/home2 none bind,defaults 0 0" >> /etc/fstab
 
-for folder in ${folders[@]}; do
-  umount /srv/nfs/${folder}
-  mount /srv/nfs/${folder}
-done
+umount /srv/nfs/home1
+umount /srv/nfs/home2
+
+#for folder in ${folders[@]}; do
+#  umount /srv/nfs/${folder}
+#  mount /srv/nfs/${folder}
+#done
 
 # Note: Ensure that no home directories remain in /home. Do not change the home directory location in the user database.
 
