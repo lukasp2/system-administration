@@ -11,11 +11,11 @@ sed -i '/srv/d' /etc/fstab
 # 3-1 Set your server up as a file server using NFS (or the network file system of your choice).
 apt-get -y install nfs-kernel-server
 
-# 3-2 Configure your server to export the /usr/local directory to all clients [...]
+# 3-2 Configure your server to export the /usr/local directory to all clients [...] Your server must not treat root users on the client as root on the exported file system.
 permissions="(rw,sync,no_root_squash,no_subtree_check)"
 echo "/usr/local 10.0.0.3${permissions} 10.0.0.4${permissions}" >> /etc/exports
 
-# [...] It must not be possible to access /usr/local from any other system. Your server must not treat root users on the client as root on the exported file system. 
+# 3-2 [...] It must not be possible to access /usr/local from any other system. [...]
 echo "portmap: 10.0.0./255.255.255.248\nportmap: 127.0.0.1" >> /etc/hosts.allow
 echo "portmap: ALL" >> /etc/hosts.deny
 
@@ -40,9 +40,9 @@ mount /srv/nfs/home2
 # Note: Ensure that no home directories remain in /home. Do not change the home directory location in the user database.
 
 # 4-3 Configure your NFS server to export /home1 and /home2 with the appropriate permissions to your clients (and only your clients)
-echo "/srv/nfs/ 10.0.0.3(fsid=0,${permissions}) 10.0.0.4(fsid=0,${permissions})" >> /etc/exports
+# echo "/srv/nfs/ 10.0.0.3(fsid=0,${permissions}) 10.0.0.4(fsid=0,${permissions})" >> /etc/exports
+# echo "/srv/nfs/local/ ${nw}.${STARTADDRESS}/29${permissions}" >> /etc/exports
 
-echo "/srv/nfs/local/ ${nw}.${STARTADDRESS}/29${permissions}" >> /etc/exports
 echo "/srv/nfs/home1/ 10.0.0.3${permissions}" >> /etc/exports
 echo "/srv/nfs/home2/ 10.0.0.4${permissions}" >> /etc/exports
 exportfs -rav
@@ -67,5 +67,6 @@ echo -e "+auto.master" >> /etc/auto.master
 # see test script
 
 nisrestart
+
 /etc/init.d/autofs start
 
