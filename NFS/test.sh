@@ -41,6 +41,11 @@ fi
 
 su -
 
-# delete users
+# delete users and home dirs
+rm -Rf /home1
+rm -Rf /home2
+
 userdel -r user1
 userdel -r user2
+
+
