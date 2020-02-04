@@ -46,7 +46,7 @@ def generate_numbers(username):
   if (output == ''):
     username = username + "000"
   else:
-    username = username + (str(int(output[5:8]) + 1))
+    username = username + (3 - len(str(int(output[5:8]) + 1)))*"0" + (str(int(output[5:8]) + 1))
 
   return username
 
