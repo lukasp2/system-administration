@@ -61,8 +61,8 @@ def create_home(name, username, password):
   print("username: ", username)
   print("and password: ", password)
 
-  bash = "mkdir /home" + home_str + "/" + username
-  output = os.popen(bash).read()
+  #bash = "mkdir /home" + home_str + "/" + username
+  #output = os.popen(bash).read()
 
   #time.sleep(0.2)
   #bash = "echo " + username + ":" + password + " | chpasswd"
