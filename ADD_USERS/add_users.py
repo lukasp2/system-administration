@@ -52,13 +52,14 @@ def generate_numbers(username):
 
 def create_home(name, username, password):
   #bash = "adduser " + username + " --no-create-home" + " --gecos '" + name + "' --disabled-password"
+  home_str = str(randint(1,2))
   bash = "useradd -m -G users -p " + password + " -b /home" + home_str + " " + username
   output = os.popen(bash).read()
 
   time.sleep(2)
   print("User created for " + name + ":\nusername: " + username + " \nand password: " + password)
 
-  home_str = str(randint(1,2))
+  
   bash = "mkdir /home" + home_str + "/" + username
   output = os.popen(bash).read()
 
