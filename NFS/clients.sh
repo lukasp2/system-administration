@@ -11,6 +11,6 @@ echo -e "automount:\tfiles nis" >> /etc/nsswitch.conf
 echo "mount -t nfs 10.0.0.1:/usr/local /mnt/usr/local" >> /etc/exports
 echo "10.0.0.1:/usr/local /mnt nfs defaults 0 0" >> /etc/fstab
 
-nisrestart
+/etc/init.d/nis restart
 
 /etc/init.d/autofs start
