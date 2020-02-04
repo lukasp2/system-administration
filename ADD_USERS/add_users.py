@@ -51,19 +51,20 @@ def generate_numbers(username):
   return username
 
 def create_home(name, username, password):
-  bash = "adduser " + username + " --no-create-home" + " --gecos '" + name + "' --disabled-password"
+  #bash = "adduser " + username + " --no-create-home" + " --gecos '" + name + "' --disabled-password"
+  bash = "useradd -m -G users -p " + password + " -b /home" + home_str + " " + username
   output = os.popen(bash).read()
 
   time.sleep(2)
-  print("User created with \nusername: " + username + " \nand password: " + password)
+  print("User created for " + name + ":\nusername: " + username + " \nand password: " + password)
 
   home_str = str(randint(1,2))
   bash = "mkdir /home" + home_str + "/" + username
   output = os.popen(bash).read()
 
-  time.sleep(0.2)
-  bash = "echo " + username + ":" + password + " | chpasswd"
-  output = os.popen(bash).read()
+  #time.sleep(0.2)
+  #bash = "echo " + username + ":" + password + " | chpasswd"
+  #output = os.popen(bash).read()
   
   time.sleep(0.2)
   bash = "chown " + username + ":" + username + " /home" + home_str + "/" + username
@@ -71,6 +72,7 @@ def create_home(name, username, password):
   
   time.sleep(0.2)
   bash = "chmod 700 /home" + home_str + "/" + username    
+  output = os.popen(bash).read()
   
   time.sleep(0.2)
   with open("/etc/auto.home", "a") as myfile:
@@ -78,7 +80,7 @@ def create_home(name, username, password):
 
 ## MAIN ##
 if (len(sys.argv) != 2):
-  print("Usage: python add_user.py <filename>") 
+  print("usage: python add_user.py <filename>") 
 else:
   create_users(sys.argv[1])
 
