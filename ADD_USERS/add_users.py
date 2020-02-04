@@ -1,5 +1,6 @@
 
 #!/usr/bin/python
+
 import time
 import sys
 import subprocess
@@ -9,7 +10,6 @@ from random import randint
 import random
 
 def create_users(file):
-  #f = open(file, 'r')
   names = [line.strip('\n') for line in open(file, 'r')]
 
   for name in names:
@@ -51,7 +51,6 @@ def generate_numbers(username):
   return username
 
 def create_home(name, username, password):
-  #bash = "adduser " + username + " --no-create-home" + " --gecos '" + name + "' --disabled-password"
   home_str = str(randint(1,2))
   bash = "useradd -m -G users -p " + password + " -b /home" + home_str + " " + username
   output = os.popen(bash).read()
@@ -61,13 +60,6 @@ def create_home(name, username, password):
   print("username: ", username)
   print("and password: ", password)
 
-  #bash = "mkdir /home" + home_str + "/" + username
-  #output = os.popen(bash).read()
-
-  #time.sleep(0.2)
-  #bash = "echo " + username + ":" + password + " | chpasswd"
-  #output = os.popen(bash).read()
-  
   time.sleep(0.2)
   bash = "chown " + username + ":" + username + " /home" + home_str + "/" + username
   output = os.popen(bash).read()
