@@ -1,7 +1,5 @@
 #!/bin/bash
 
-apt-get -y install sshpass
-
 # delete users and home dirs
 rm -Rf /home1
 rm -Rf /home2
@@ -35,23 +33,13 @@ else
   echo "Home directory for user2 is incorrect" 
 fi
 
-su user1
-USER=$(whoami)
-if [[ $USER == user1 ]]; then
-  echo "Successfully logged in to user1"
-else
-  echo "Could not log in to user1"
-fi
-
-su user2
-USER=$(whoami)
-if [[ $USER == user2 ]]; then
-  echo "Successfully logged in to user2"
-else
-  echo "Could not log in to user2"
-fi
-
-su -
+echo "Now make sure you can log in to user1 by running:"
+echo "> su user1"
+echo "and then:"
+echo "> whoami"
+echo "which should return the string:"
+echo "> user1"
+echo ".. do the same for user2"
 
 # delete users and home dirs
 rm -Rf /home1
