@@ -1,9 +1,0 @@
-Scripts for testing <server>
-1. $ apt-get install aptitude
-
-2. add to /etc/apt/sources.list:
-  deb http://ftp.se.debain.org/debian/ jessie main
-
-3. run:
-  $ apt-get clean
-  $ apt-get update
