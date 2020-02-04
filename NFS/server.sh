@@ -7,9 +7,12 @@ sed -i '/^automount/d' /etc/nsswitch.conf
 sed -i '/auto\.master/d' /etc/auto.master
 sed -i '/srv/d' /etc/fstab
 
+umount /srv/nfs/home1
+umount /srv/nfs/home2
+
 # Exercise 3: Configure a file server
 # 3-1 Set your server up as a file server using NFS (or the network file system of your choice).
-apt-get -y install nfs-kernel-server
+apt-get -y install autofs nfs-kernel-server
 modprobe nfs
 
 # 3-2 Configure your server to export the /usr/local directory to all clients [...] Your server must not treat root users on the client as root on the exported file system.
@@ -33,8 +36,7 @@ mkdir -p /srv/nfs/home2
 echo "/home1/ /srv/nfs/home1 none bind,defaults 0 0" >> /etc/fstab
 echo "/home2/ /srv/nfs/home2 none bind,defaults 0 0" >> /etc/fstab
 
-umount /srv/nfs/home1
-umount /srv/nfs/home2
+#reboot here
 
 mount /srv/nfs/home1
 mount /srv/nfs/home2
@@ -58,7 +60,7 @@ exportfs -rav
 ...
 
 # 5-1 Install an automounter on the clients and on the server. The autofs package is recommended. [...]
-apt-get -y install autofs
+# done in 3-1
 
 # 5-2 Configure the automounter so it mounts /home/USERNAME from the user's real home directory (on the NFS server). Make /home an indirect mount point - that is, the automounter will automatically mount subdirectories of /home, but not /home itself. You will probably need one line per user in the configuration file.
 echo -e "/home /etc/auto.home" > /etc/auto.master
@@ -68,7 +70,7 @@ echo -e "+auto.master" >> /etc/auto.master
 # (5-3 Verify that all users can log on to the client and that the correct home directories are mounted.)
 # see test script
 
-nisrestart
+#nisrestart
 
 /etc/init.d/autofs start
 
