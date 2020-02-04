@@ -2,6 +2,13 @@
 
 apt-get -y install sshpass
 
+# delete users and home dirs
+rm -Rf /home1
+rm -Rf /home2
+
+userdel -r user1
+userdel -r user2
+
 # 4-2 Create /home1/ and /home2/ directories
 mkdir /home1
 mkdir /home2
