@@ -70,7 +70,6 @@ echo -e "+auto.master" >> /etc/auto.master
 # (5-3 Verify that all users can log on to the client and that the correct home directories are mounted.)
 # see test script
 
-#nisrestart
-
+/etc/init.d/nis restart
 /etc/init.d/autofs start
 
