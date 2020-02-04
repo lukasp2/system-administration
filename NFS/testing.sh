@@ -43,10 +43,7 @@ echo ".. do the same for user2"
 echo ""
 echo ".. also try creating a file in user1's home dir from the server and then access it from user1's account"
 
-# delete users and home dirs
-rm -Rf /home1
-rm -Rf /home2
-
+# delete users
 userdel -r user1
 userdel -r user2
 
