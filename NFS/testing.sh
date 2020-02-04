@@ -1,5 +1,7 @@
 #!/bin/bash
 
+apt-get -y install sshpass
+
 # 4-2 Move one user's home directory to /home2/USERNAME and the other user's home directory to /home1/USERNAME.
 
 # 4-2 Create two new users.
