@@ -1,7 +1,6 @@
 #!/bin/bash
 
 echo "Testing $ dig dons.com"
-dig dons.com | grep -A 1 "ANSWER SECTION:"
 DNS=$(dig dons.com | grep -A 1 "ANSWER SECTION:" | grep -o "10.0.0.2")
 
 if [[ $DNS == "10.0.0.2" ]]; then
@@ -11,7 +10,6 @@ else
 fi
 
 echo "Testing $ dig -x 10.0.0.2"
-dig -x 10.0.0.2 | grep -A 1 "ANSWER SECTION:"
 DNS=$(dig -x 10.0.0.2 | grep -A 1 "ANSWER SECTION:" | grep -o "pri.dons.com")
 
 if [[ $DNS == "pri.dons.com" ]]; then
@@ -20,7 +18,7 @@ else
   echo "FAILED: dig -x 10.0.0.2"
 fi
 
-echo "Checking the DNS configuration files"
+echo "Testing DNS configuration files"
 OUTPUT=$(named-checkconf /etc/bind/named.conf)
 if [[ $OUTPUT == "" ]]; then
   echo "OK: named-checkconf /etc/bind/named.conf"
