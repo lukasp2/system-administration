@@ -8,11 +8,3 @@ else
   echo "FAILED: ypwhich"
 fi
 
-OUTPUT=$(yptest | grep "failed")
-if [[ $OUTPUT == "" ]]; then
-  echo "OK: yptest"
-else
-  echo "FAILED: yptest"
-fi
-
-
