@@ -70,6 +70,9 @@ def create_home(name, username, password):
   time.sleep(0.2)
   with open("/etc/auto.home", "a") as myfile:
       myfile.write(username + " -fstype=nfs,nfsvers=3,rw,sync server:/home" + home_str + "/" + username + "\n")
+  
+  bash = "usermod -d /home/" + username
+  output = os.popen(bash).read()
 
 ## MAIN ##
 if (len(sys.argv) != 2):
